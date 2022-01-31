@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from series.api.serializers import DetailSerieSerializer, EpisodeSerializer, SerieSerializer
 from series.models import Serie, Episode
-
+from series.api.permissions import IsMeOrReadOnly
 
 class EpisodesViewset(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
@@ -17,7 +17,7 @@ class EpisodesViewset(ModelViewSet):
 
 
 class SeriesViewset(ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsMeOrReadOnly]
     serializer_class = SerieSerializer
     queryset = Serie.objects.all()
 
