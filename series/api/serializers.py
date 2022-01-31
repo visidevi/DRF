@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.fields import SerializerMethodField
 
-from series.models import Episode, Serie
+from series.models import Episode, Score, Serie
 
 
 class SerieSerializer(serializers.ModelSerializer):
@@ -33,6 +33,14 @@ class DetailSerieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Serie
         fields = ('id', 'title', 'description', 'episodes')
+
+
+class ScoreSerieSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Score
+        fields = ('id', 'score', 'user', 'serie')
+
 
     # title = serializers.CharField(required=True)
     # description = serializers.CharField(required=True)
