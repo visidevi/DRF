@@ -2,14 +2,14 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from series.api.serializers import SerieSerializer
 from series.models import Serie
 
 
 class SeriesViewset(ViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
     def list(self, request):
         series = SerieSerializer(Serie.objects.all(), many=True)

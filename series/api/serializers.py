@@ -20,6 +20,8 @@ class SerieSerializer(serializers.Serializer):
             raise ValidationError('The description cannot be blank')
         return description
 
+
+
     def create(self, **kwargs) -> Serie:
         serie = Serie.objects.create(**self.validated_data)
         return serie
@@ -30,6 +32,8 @@ class SerieSerializer(serializers.Serializer):
 
         self.instance.save()
         return self.instance
+
+
 
     def save(self, **kwargs):
         if self.instance is not None:

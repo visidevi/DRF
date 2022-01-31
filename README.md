@@ -33,3 +33,10 @@ El proyecto está divido en los siguientes componentes:
 - **series**: Aplicación que contiene toda la lógica de como gestiona fetlix las series.
 
 - **users**: Aplicación de Django que contiene la lógica de gestión de usuarios del proyecto.
+
+```
+aws codeartifact login --tool pip  --repository beta --domain consorcio-artifacts --domain-owner 379009453067 --profile devops
+```
+```
+pip install -r  requirements.txt --extra-index-url https://pypi.python.org/simple
+pip install djangorestframework-simplejwt --extra-index-url https://pypi.python.org/simple
