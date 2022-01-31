@@ -2,7 +2,7 @@ from django.db.models import fields
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.fields import SerializerMethodField
-
+from django.db.models import Avg
 from series.models import Episode, Score, Serie
 
 
@@ -24,6 +24,10 @@ class DetailSerieSerializer(serializers.ModelSerializer):
     #     source='episode_set',
     #     many=True)
     episodes = SerializerMethodField()
+    score = SerializerMethodField()
+    def get_score(self, serie: Serie) -> int:
+        return Score.objects.filter(serie=serie.pk).aggregate(score=Avg('score')).get('score')
+
 
     def get_episodes(self, instance):
         return list(instance.episode_set.values('id', 'name'))
@@ -32,7 +36,7 @@ class DetailSerieSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Serie
-        fields = ('id', 'title', 'description', 'episodes')
+        fields = ('id', 'title', 'description', 'episodes', 'score')
 
 
 class ScoreSerieSerializer(serializers.ModelSerializer):

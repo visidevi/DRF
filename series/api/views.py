@@ -37,7 +37,7 @@ class SeriesViewset(ModelViewSet):
     @action(
         detail=True,
         methods=['PUT'],
-        url_path='set_score',
+        url_path='set-score',
         permission_classes = [IsMeOrReadOnly])
     def set_score(self, request, pk: int):
         data = {'serie': pk,
