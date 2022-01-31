@@ -35,7 +35,7 @@ El proyecto está divido en los siguientes componentes:
 - **users**: Aplicación de Django que contiene la lógica de gestión de usuarios del proyecto.
 
 ```
-aws codeartifact login --tool pip  --repository beta --domain consorcio-artifacts --domain-owner 379009453067 --profile devops
+
 ```
 ```
 pip install -r  requirements.txt --extra-index-url https://pypi.python.org/simple
