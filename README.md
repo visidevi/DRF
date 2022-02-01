@@ -40,3 +40,26 @@ El proyecto está divido en los siguientes componentes:
 ```
 pip install -r  requirements.txt --extra-index-url https://pypi.python.org/simple
 pip install djangorestframework-simplejwt --extra-index-url https://pypi.python.org/simple
+
+
+```
+Durante esta clase hemos visto una serie de comandos que os dejo aquí resumidos:
+
+1. Crear fixtures de usuarios
+`python [manage.py](http://manage.py/) dumpdata --format=json auth.user > fixtures/users.json`
+python manage.py dumpdata --format=json auth.user > fixtures/users.json
+
+2. Crear fixtures de series
+`python [manage.py](http://manage.py/) dumpdata --format=json --pks 1 series.serie > fixtures/series.json`
+python manage.py dumpdata --format=json --pks 1 series.serie > fixtures/series.json
+
+3. crear fixtures de episodios
+`python manage.py dumpdata --format=json --pks 1 series.episode >> fixtures/series.json`
+
+
+Hay que ejecutarlas en el orden especificado. Para conseguir más información relativa a las fixtures de django podéis consultar:
+
+https://docs.djangoproject.com/en/3.1/howto/initial-data/
+
+https://code.djangoproject.com/wiki/Fixtures
+```
