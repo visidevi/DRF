@@ -63,3 +63,10 @@ https://docs.djangoproject.com/en/3.1/howto/initial-data/
 
 https://code.djangoproject.com/wiki/Fixtures
 ```
+
+### Coverage
+```
+coverage run manage.py test
+coverage report -m
+coverage run  --source='.' manage.py test
+```
