@@ -172,7 +172,7 @@ LOGGING = {
     }
 }
 
-ADMINS = [('JuanB', 'juanbenito.pr@gmail.com')]
+ADMINS = [('JuanB', 'visidevi@gmail.com')]
 FIXTURE_DIRS = [str(BASE_DIR.joinpath('fixtures/')), ]
 
 LOGIN_URL = '/login/'
