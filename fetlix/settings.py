@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import datetime
 from pathlib import Path
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -106,7 +107,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        #'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
@@ -167,20 +168,31 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # Con estas líneas se habilita el loggeo de las queries a la base de datos
-# LOGGING = {
-#     'version': 1,
-#     'handlers': {
-#         'console': {
-#             'class': 'logging.StreamHandler',
-#         },
-#     },
-#     'loggers': {
-#         'django.db.backends': {
-#             'level': 'DEBUG',
-#             'handlers': ['console']
-#         },
-#     }
-# }
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'default': {
+            'class': 'logging.Formatter',
+            'format': '%(asctime)s - %(levelname)s -%(name)s %(message)s'
+        }},
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+            'formatter': 'default'
+        },'error_file': {
+            'class': 'logging.FileHandler',
+            'filename': 'error.log',
+            'formatter': 'default'
+        }
+    },
+    'loggers': {
+        '': {
+            'level': 'INFO',
+            'handlers': ['console', 'error_file']
+        },
+    }
+}
 
 LOGIN_URL = '/login/'
 FIXTURE_DIRS = [str(BASE_DIR.joinpath('fixtures/'))]

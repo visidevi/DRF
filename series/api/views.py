@@ -1,14 +1,12 @@
-from django.shortcuts import get_object_or_404
-from rest_framework import serializers
 from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 from series.api.serializers import DetailSerieSerializer, ScoreSerieSerializer, EpisodeSerializer, SerieSerializer
 from series.models import Serie, Episode, Score
 from series.api.permissions import IsMeOrReadOnly
-
+import logging
 
 class EpisodesViewset(ModelViewSet):
     permission_classes = [IsAuthenticatedOrReadOnly]
@@ -26,7 +24,12 @@ class SeriesViewset(ModelViewSet):
     serializer_class = SerieSerializer
     queryset = Serie.objects.all()
 
+    def __init__(self, **kwargs) -> None:
+        self.logger = logging.getLogger(__name__)
+        super().__init__(**kwargs)
+
     def get_serializer_class(self):
+        self.logger.info(self.action)
         serializer = self.serializer_class
         if self.action == 'retrieve':
             serializer = DetailSerieSerializer
