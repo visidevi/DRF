@@ -10,11 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import datetime
-from pathlib import Path
 import sys
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -49,6 +48,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'middleware.logging_middleware.LoggingMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -108,6 +108,10 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
@@ -196,3 +200,47 @@ LOGGING = {
 
 LOGIN_URL = '/login/'
 FIXTURE_DIRS = [str(BASE_DIR.joinpath('fixtures/'))]
+LOGGING = {
+    'version': 1,
+    'formatters': {
+        'request': {
+            'class': 'logging.Formatter',
+            'format': 'Request: { timestamp: %(asctime)s - path: %(path)s - user: %(user)s - body: %(body)s }'
+        },
+        'response': {
+            'class': 'logging.Formatter',
+            'format': 'Response: { timestamp: %(asctime)s - path: %(path)s - user: %(user)s - status: %(status)s - body: %(body)s }'
+        }
+    },
+    'handlers': {
+        'requests': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'request',
+            'stream': sys.stdout,
+            'level': 'DEBUG'
+        },
+        'response': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'response',
+            'stream': sys.stdout,
+            'level': 'DEBUG'
+        }
+    },
+    'loggers': {
+        'middleware.requests': {
+            'level': 'DEBUG',
+            'handlers': ['requests']
+        },
+        'middleware.response': {
+            'level': 'DEBUG',
+            'handlers': ['response']
+        }
+    }
+}
+
+ADMINS = [('JuanB', 'visidevi@gmail.com')]
+FIXTURE_DIRS = [str(BASE_DIR.joinpath('fixtures/')), ]
+
+LOGIN_URL = '/login/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
