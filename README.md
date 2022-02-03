@@ -40,6 +40,9 @@ El proyecto está divido en los siguientes componentes:
 ```
 pip install -r  requirements.txt --extra-index-url https://pypi.python.org/simple
 pip install djangorestframework-simplejwt --extra-index-url https://pypi.python.org/simple
+pip install django-heroku --extra-index-url https://pypi.python.org/simple
+pip install gunicorn --extra-index-url https://pypi.python.org/simple
+
 
 
 ```
@@ -70,3 +73,6 @@ coverage run manage.py test
 coverage report -m
 coverage run  --source='.' manage.py test
 ```
+git add .
+git commit -am "make it better"
+git push heroku master

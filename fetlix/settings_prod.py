@@ -36,7 +36,7 @@ DATABASES = {
     }
 }
 
-ADMINS = [('JuanB', 'juanbenito.pr@gmail.com')]
+ADMINS = [('JuanB', 'visidevi@gmail.com')]
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 SECURE_HSTS_SECONDS = 60*24*365
