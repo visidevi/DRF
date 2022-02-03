@@ -1,9 +1,8 @@
 from django.db.models import fields
 from rest_framework import serializers
-from rest_framework.exceptions import ValidationError
 from rest_framework.fields import SerializerMethodField
 from django.db.models import Avg
-from series.models import Episode, Score, Serie
+from series.models import Episode, Score, Serie, ScoreEpisode
 
 
 class SerieSerializer(serializers.ModelSerializer):
@@ -44,6 +43,16 @@ class ScoreSerieSerializer(serializers.ModelSerializer):
     class Meta:
         model = Score
         fields = ('id', 'score', 'user', 'serie')
+
+
+
+class ScoreEpisodeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ScoreEpisode
+        fields = ('id', 'episode', 'user', 'score')
+
+
 
 
     # title = serializers.CharField(required=True)

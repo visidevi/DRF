@@ -6,8 +6,12 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
-from series.api.serializers import SerieSerializer, DetailSerieSerializer, ScoreSerializer, EpisodeSerializer, \
-    ScoreEpisodeSerializer
+from series.api.serializers import (
+    SerieSerializer,
+    DetailSerieSerializer,
+    ScoreSerieSerializer,
+    EpisodeSerializer,
+    ScoreEpisodeSerializer)
 from series.models import Serie, Episode
 
 
@@ -24,7 +28,7 @@ class SeriesViewset(ModelViewSet):
         if self.action == 'retrieve':
             return DetailSerieSerializer
         if self.action == 'set_score':
-            return ScoreSerializer
+            return ScoreSerieSerializer
         else:
             return self.serializer_class
 
