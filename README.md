@@ -43,6 +43,7 @@ pip install djangorestframework-simplejwt --extra-index-url https://pypi.python.
 pip install django-heroku --extra-index-url https://pypi.python.org/simple
 pip install gunicorn --extra-index-url https://pypi.python.org/simple
 
+pip install psycopg2-binary --extra-index-url https://pypi.python.org/simple
 
 
 ```
